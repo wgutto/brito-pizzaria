@@ -13,6 +13,7 @@ model Product {
   image String @default("default.jpg")
   price Decimal @db.Money()
   ingredients String?
+  category Categories @default(ALL)
 
   orderProducts OrderProducts[]
 
@@ -63,4 +64,12 @@ enum OrderStatus {
   SENT
   DELIVERED
   CANCELED
+}
+
+enum Categories {
+  ALL
+  SAVORY_PIZZAS
+  SWEET_PIZZAS
+  DRINKS
+  HAMBURGERS
 }

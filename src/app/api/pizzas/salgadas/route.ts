@@ -1,8 +1,8 @@
-import { getAllPizzas } from "@/services/product"
+import { getSavoryPizzas } from "@/services/product"
 import { NextResponse } from "next/server"
 
 export const GET = async () => {
-    let pizzas = await getAllPizzas()
+    let pizzas = await getSavoryPizzas()
 
     pizzas = pizzas.map((pizza) => ({
         ...pizza,

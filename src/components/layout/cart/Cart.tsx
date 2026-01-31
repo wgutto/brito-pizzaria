@@ -7,7 +7,7 @@ export const Cart = () => {
         <div>
             <Sheet>
                 <SheetTrigger asChild>
-                    <Button className="cursor-pointer">
+                    <Button className="cursor-pointer w-15">
                         <ShoppingCart className="size-6" />
                     </Button>
                 </SheetTrigger>

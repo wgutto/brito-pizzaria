@@ -1,5 +1,6 @@
 import { PizzaList } from "@/components/home/pizza-list"
 import { Header } from "@/components/layout/Header"
+import { ToggleModeButton } from "@/components/layout/ToggleThemeMode"
 import { api } from "@/lib/axios"
 
 const Page = async () => {
@@ -9,8 +10,10 @@ const Page = async () => {
 
   return (
     <>
+      <div className="fixed bottom-5 right-5"><ToggleModeButton/></div>
       <Header/>
-      <main className="container mx-auto mb-10 mt-5 px-4">
+      <main className="container mx-auto mb-10 px-4">
+        <h1 className="text-center text-4xl font-bold my-10">Nossas Pizzas</h1>
         <PizzaList pizzas={pizzas}/>
       </main>
     </>

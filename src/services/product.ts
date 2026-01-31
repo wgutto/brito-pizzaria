@@ -1,7 +1,23 @@
 import { prisma } from "@/lib/prisma"
 
-export const getAllProducts = async () => {
-    const products = await prisma.product.findMany()
+export const getAllPizzas = async () => {
+    const pizzas = await prisma.product.findMany({
+        where: {
+            category: {
+                in: ['SAVORY_PIZZAS', 'SWEET_PIZZAS']
+            }
+        }
+    })
 
-    return products
+    return pizzas
+}
+
+export const getSavoryPizzas = async () => {
+    const savoryPizzas = await prisma.product.findMany({
+        where: {
+            category: 'SAVORY_PIZZAS'
+        }
+    })
+
+    return savoryPizzas
 }

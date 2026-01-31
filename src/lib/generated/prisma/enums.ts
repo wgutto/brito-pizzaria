@@ -19,3 +19,14 @@ export const OrderStatus = {
 } as const
 
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const Categories = {
+  ALL: 'ALL',
+  SAVORY_PIZZAS: 'SAVORY_PIZZAS',
+  SWEET_PIZZAS: 'SWEET_PIZZAS',
+  DRINKS: 'DRINKS',
+  HAMBURGERS: 'HAMBURGERS'
+} as const
+
+export type Categories = (typeof Categories)[keyof typeof Categories]
