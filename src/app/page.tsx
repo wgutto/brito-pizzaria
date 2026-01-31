@@ -10,7 +10,7 @@ const Page = async () => {
   return (
     <>
       <Header/>
-      <main className="container mx-auto mb-10 mt-5">
+      <main className="container mx-auto mb-10 mt-5 px-4">
         <PizzaList pizzas={pizzas}/>
       </main>
     </>
