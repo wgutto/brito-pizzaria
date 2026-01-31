@@ -21,3 +21,13 @@ export const getSavoryPizzas = async () => {
 
     return savoryPizzas
 }
+
+export const getSweetPizzas = async () => {
+    const sweetPizzas = await prisma.product.findMany({
+        where: {
+            category: 'SWEET_PIZZAS'
+        }
+    })
+
+    return sweetPizzas
+}
