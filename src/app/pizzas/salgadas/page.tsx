@@ -1,6 +1,5 @@
 import { PizzaList } from "@/components/home/pizza-list"
-import { Header } from "@/components/layout/Header"
-import { ToggleModeButton } from "@/components/layout/ToggleThemeMode"
+import { PizzasTabs } from "@/components/layout/PizzasTabs/PizzaTabs"
 import { api } from "@/lib/axios"
 
 const Page = async () => {
@@ -10,9 +9,8 @@ const Page = async () => {
 
     return (
         <>
-            <div className="fixed bottom-5 right-5"><ToggleModeButton /></div>
-            <Header />
             <main className="container mx-auto mb-10 px-4">
+                <PizzasTabs active="/pizzas/salgadas"/>
                 <h1 className="text-center text-4xl font-bold my-10">Pizzas Salgadas</h1>
                 <PizzaList pizzas={pizzas} />
             </main>
