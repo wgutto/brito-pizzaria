@@ -1,5 +1,3 @@
-"use client"
-
 import { Product } from "@/lib/generated/prisma/client"
 import { PizzaItem } from "./pizza-item"
 
