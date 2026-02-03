@@ -15,3 +15,18 @@ export const decimalToMoney = (price: number | string | Prisma.Decimal) => {
       maximumFractionDigits: 2,
     })
 }
+
+const SIZE_MULTIPLIERS: Record<string, number> = {
+  pequena: 0.8,
+  media: 1,
+  grande: 1.3,
+}
+
+const EDGE_PRICES: Record<string, number> = {
+  "sem-borda": 0,
+  "borda-recheada": 5,
+}
+
+export const calculatePizzaFinalPrice = (basePrice: number, size: string, edge: string): number => {
+  return basePrice * (SIZE_MULTIPLIERS[size] ?? 1) + (EDGE_PRICES[edge] ?? 0)
+}

@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from "../ui/button"
 import { useState } from "react"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
-import { decimalToMoney } from "@/lib/utils"
+import { calculatePizzaFinalPrice, decimalToMoney } from "@/lib/utils"
 import { useCart } from "@/stores/cart"
 
 type Props = {
@@ -16,24 +16,17 @@ export const DetailsModal = ({ pizza, openModal, closeModal }: Props) => {
     const [selectedEdge, setSelectedEdge] = useState("sem-borda")
     const cart = useCart()
 
-    const sizes: Record<string, number> = {
-        pequena: 0.8,
-        media: 1,
-        grande: 1.3,
-    }
-
-    const edges: Record<string, number> = {
-        "sem-borda": 0,
-        "borda-recheada": 5,
-    }
-
     const priceAsNummber = Number(pizza.price)
-    const finalPrice = priceAsNummber * sizes[selectedSize] + edges[selectedEdge]
+    const finalPrice = calculatePizzaFinalPrice(priceAsNummber, selectedSize, selectedEdge)
 
     const handleConfirm = () => {
-        cart.addItem(
-            { productId: pizza.id, quantity: 1 }, selectedSize, selectedEdge, finalPrice
-        )
+        cart.addItem({
+            productId: pizza.id,
+            quantity: 1,
+            size: selectedSize,
+            edge: selectedEdge,
+            finalPrice: finalPrice
+        })
         closeModal()
         cart.setOpen(true)
     }
