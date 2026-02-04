@@ -5,7 +5,7 @@ import { api } from "@/lib/axios"
 const Page = async () => {
   // Aqui esta sendo feita a requisição para buscar as pizzas, para que carregue no servidor e envie o HTML pronto para o cliente
   const pizzaReq = await api.get("/pizzas")
-  const pizzas = pizzaReq.data.pizzas ?? []
+  const pizzas = pizzaReq.data.pizzas
 
   return (
     <>

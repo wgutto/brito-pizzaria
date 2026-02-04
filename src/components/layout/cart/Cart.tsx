@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { ShoppingCart } from "lucide-react"
-import { CartItem } from "./Cart-Item"
 import { useCart } from "@/stores/cart"
+import { CartItem } from "./Cart-Item"
 
 export const Cart = () => {
     const cart = useCart()
