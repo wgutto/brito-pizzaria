@@ -7,6 +7,7 @@ import { Product } from "@/lib/generated/prisma/client"
 import { decimalToMoney } from "@/lib/utils"
 import { useState } from "react"
 import { DetailsModal } from "./DetailsModal"
+import Image from "next/image"
 
 type Props = {
     pizza: Product
@@ -18,7 +19,14 @@ export const PizzaItem = ({ pizza }: Props) => {
             <Card key={pizza.id} className="px-0">
                 <CardContent className="min-h-full flex flex-col justify-between gap-6 px-4">
                     <CardHeader className="flex flex-col items-center gap-4 px-0">
-                        <img src={pizza.image} alt={pizza.image} className="w-full rounded-md" />
+                        <Image
+                            src={pizza.image}
+                            alt={pizza.name}
+                            width={100}
+                            height={100}
+                            unoptimized
+                            className="w-full rounded-md"
+                        />
 
                         <div className="w-full flex flex-col gap-2">
                             <CardTitle className="text-center text-lg">{pizza.name}</CardTitle>

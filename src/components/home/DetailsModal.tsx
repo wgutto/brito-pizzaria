@@ -1,10 +1,11 @@
 import { Product } from "@/lib/generated/prisma/client"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog"
 import { Button } from "../ui/button"
 import { useState } from "react"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { calculatePizzaFinalPrice, decimalToMoney } from "@/lib/utils"
 import { useCart } from "@/stores/cart"
+import Image from "next/image"
 
 type Props = {
     pizza: Product
@@ -40,7 +41,14 @@ export const DetailsModal = ({ pizza, openModal, closeModal }: Props) => {
                 </DialogHeader>
 
                 <div className="flex items-center gap-5">
-                    <img src={pizza.image} alt={pizza.name} className="w-20 rounded-full" />
+                    <Image
+                        src={pizza.image}
+                        alt={pizza.name}
+                        width={100}
+                        height={100}
+                        unoptimized
+                        className="rounded-full"
+                    />
                     <div>
                         <h2 className="font-semibold">{pizza.name}</h2>
                         <p className="text-muted-foreground">{pizza.ingredients}.</p>
