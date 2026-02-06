@@ -18,9 +18,8 @@ export const Cart = () => {
     const calculateSubtotal = () => {
         let subtotal = 0
         cart.items.map((item) => {
-            const product = products.products.find(i => i.id === item.productId)
 
-            if(product) subtotal += Number(product.price)
+            subtotal += Number(item.subtotalItem * item.quantity)
         })
 
         setSubtoal(subtotal)
@@ -36,21 +35,31 @@ export const Cart = () => {
                     </Button>
                 </SheetTrigger>
                 <SheetContent>
-                    <SheetHeader>
+                    <SheetHeader className="pb-2">
                         <SheetTitle className="flex items-center gap-2">
                             <ShoppingCart className="size-7" />
-                            <p className="text-3xl">Carrinho</p>
+                            <p className="text-2xl">Carrinho</p>
                         </SheetTitle>
                         <SheetDescription className="text-md">Lista de produtos no carrinho.</SheetDescription>
                     </SheetHeader>
 
                     <CartList />
 
-                    <SheetFooter className="flex gap-4">
-                            <div>
-                                <p className="font-semibold text-muted-foreground">Subtotal R$ {decimalToMoney(subtotal)}</p>
-                                <p className="font-semibold text-muted-foreground">Frete R$ {decimalToMoney(shippingCost)}</p>
-                                <p className="font-semibold text-muted-foreground">Total R$ {decimalToMoney(subtotal + shippingCost)}</p>
+                    <SheetFooter className="flex gap-4 pt-2">
+                            <div className="border-y py-2 px-1">
+                                <div className="flex justify-between">
+                                    <p>Subtotal dos itens</p>
+                                    <p>{decimalToMoney(subtotal)}</p>
+                                </div>
+                                <div className="flex justify-between">
+                                    <p>Entrega</p>
+                                    <p>{decimalToMoney(shippingCost)}</p>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-between px-1">
+                                <p className="font-semibold">Total do pedido</p>
+                                <p className="font-bold">{decimalToMoney(subtotal + shippingCost)}</p>
                             </div>
 
                             <Button className="bg-green-600 cursor-pointer hover:bg-green-700">Finalizar pedido</Button>
