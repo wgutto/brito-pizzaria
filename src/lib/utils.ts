@@ -22,9 +22,9 @@ const SIZE_MULTIPLIERS: Record<string, number> = {
   grande: 1.3,
 }
 
-const EDGE_PRICES: Record<string, number> = {
-  "sem-borda": 0,
-  "borda-recheada": 5,
+export const EDGE_PRICES: Record<string, number> = {
+  "Sem borda": 0,
+  "Borda recheada": 5,
 }
 
 export const calculatePizzaFinalPrice = (basePrice: number, size: string, edge: string): number => {

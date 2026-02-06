@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import { useCart } from "@/stores/cart"
 import { Frown } from "lucide-react"
 import { CartProduct } from "./Cart-Item"

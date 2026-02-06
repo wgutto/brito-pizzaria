@@ -5,21 +5,19 @@ import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetT
 import { ShoppingCart } from "lucide-react"
 import { useCart } from "@/stores/cart"
 import { CartList } from "./Cart-List"
-import { useProducts } from "@/stores/products"
 import { useEffect, useState } from "react"
 import { decimalToMoney } from "@/lib/utils"
 
 export const Cart = () => {
     const cart = useCart()
-    const products = useProducts()
-    const [subtotal, setSubtoal ] = useState(0)
+    const [subtotal, setSubtoal] = useState(0)
     const [shippingCost, setShippingCost] = useState(10)
 
     const calculateSubtotal = () => {
         let subtotal = 0
         cart.items.map((item) => {
 
-            subtotal += Number(item.subtotalItem * item.quantity)
+            subtotal += Number(item.finalPrice * item.quantity)
         })
 
         setSubtoal(subtotal)
@@ -45,7 +43,8 @@ export const Cart = () => {
 
                     <CartList />
 
-                    <SheetFooter className="flex gap-4 pt-2">
+                    {cart.items.length > 0 &&
+                        <SheetFooter className="flex gap-4 pt-2">
                             <div className="border-y py-2 px-1">
                                 <div className="flex justify-between">
                                     <p>Subtotal dos itens</p>
@@ -63,7 +62,8 @@ export const Cart = () => {
                             </div>
 
                             <Button className="bg-green-600 cursor-pointer hover:bg-green-700">Finalizar pedido</Button>
-                    </SheetFooter>
+                        </SheetFooter>
+                    }
                 </SheetContent>
             </Sheet>
         </div>

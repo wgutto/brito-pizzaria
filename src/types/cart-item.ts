@@ -3,5 +3,5 @@ export type CartItem = {
     quantity: number
     size: string
     edge: string
-    subtotalItem: number
+    finalPrice: number
 }

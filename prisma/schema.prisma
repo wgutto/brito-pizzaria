@@ -11,7 +11,7 @@ model Product {
   id Int @id @default(autoincrement())
   name String
   image String @default("default.jpg")
-  price Decimal @db.Money()
+  price Decimal @db.Decimal(10, 2)
   ingredients String?
   category Categories @default(ALL)
 

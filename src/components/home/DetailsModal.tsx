@@ -14,7 +14,7 @@ type Props = {
 }
 export const DetailsModal = ({ pizza, openModal, closeModal }: Props) => {
     const [selectedSize, setSelectedSize] = useState("media")
-    const [selectedEdge, setSelectedEdge] = useState("sem-borda")
+    const [selectedEdge, setSelectedEdge] = useState("Sem borda")
     const cart = useCart()
 
     const priceAsNummber = Number(pizza.price)
@@ -77,8 +77,8 @@ export const DetailsModal = ({ pizza, openModal, closeModal }: Props) => {
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                <SelectItem value="sem-borda">Sem borda</SelectItem>
-                                <SelectItem value="borda-recheada">Borda recheada</SelectItem>
+                                <SelectItem value="Sem borda">Sem borda</SelectItem>
+                                <SelectItem value="Borda recheada">Borda recheada</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
