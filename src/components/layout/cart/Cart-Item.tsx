@@ -18,7 +18,7 @@ export const CartProduct = ({ data }: Props) => {
     if(!product) return null
 
     return (
-        <div className="flex flex-col mx-2 bg-card rounded-md p-4 gap-4">
+        <div className="flex flex-col mx-2 rounded-md p-4 gap-4 bg-accent">
             <div className="flex gap-4">
                 <div className="flex items-center">
                     <Image

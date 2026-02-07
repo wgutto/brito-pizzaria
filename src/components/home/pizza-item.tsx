@@ -3,11 +3,11 @@
 import { ShoppingCart } from "lucide-react"
 import { Button } from "../ui/button"
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
-import { Product } from "@/lib/generated/prisma/client"
 import { decimalToMoney } from "@/lib/utils"
 import { useState } from "react"
 import { DetailsModal } from "./DetailsModal"
 import Image from "next/image"
+import { Product } from "@/types/product"
 
 type Props = {
     pizza: Product

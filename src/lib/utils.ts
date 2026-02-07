@@ -1,12 +1,11 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { Prisma } from "./generated/prisma/client"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const decimalToMoney = (price: number | string | Prisma.Decimal) => {
+export const decimalToMoney = (price: number | string) => {
   return parseFloat(price.toString()).toLocaleString("pt-BR",
     {
       style: "currency",

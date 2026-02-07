@@ -1,10 +1,10 @@
 "use client"
 
-import { Product } from "@/lib/generated/prisma/client"
 import { PizzaItem } from "./pizza-item"
 import { useProducts } from "@/stores/products"
 import { useEffect } from "react"
 import { useCart } from "@/stores/cart"
+import { Product } from "@/types/product"
 
 type Props = {
     pizzas: Product[]
