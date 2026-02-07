@@ -6,7 +6,7 @@ export const CartList = () => {
     const cart = useCart()
 
     return (
-        <div className="w-full h-full flex flex-col gap-4 overflow-y-scroll">
+        <div className="w-full h-full flex flex-col gap-4 overflow-y-auto">
             {cart.items.length > 0 &&
                 <>
                     {cart.items.map((item) =>
