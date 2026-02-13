@@ -2,13 +2,31 @@ import { User } from "@/types/user";
 import { create } from "zustand";
 
 type Store = {
-    authenticated: boolean
+    token: string | null
     user: User | null
+    authenticated: boolean
+    open: boolean
+    setToken: (token: string | null) => void
     setUser: (user: User | null) => void
+    setOpen: (newOpen: boolean) => void
+    logout: () => void
 }
 
 export const useAuth = create<Store>()(set => ({
-    authenticated: false,
+    token: null,
     user: null,
-    setUser: (user) => set(state => ({user, authenticated: user ? true : false}))
+    authenticated: false,
+    open: false,
+
+    setToken: (token: string | null) => set({ token: token, authenticated: !!token }),
+
+    setUser: (user: User | null) => set({user: user, authenticated: !!user}),
+
+    setOpen: (newOpen: boolean) => set({open: newOpen}),
+
+    logout: () => set({
+        token: null,
+        user: null,
+        authenticated: false
+    })
 }))

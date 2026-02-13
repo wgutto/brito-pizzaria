@@ -2,8 +2,11 @@ import Image from "next/image"
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { Cart } from "./cart/Cart"
+import { LoginAreaButton } from "../login-area/login-area-button"
+import { LoginAreaDialog } from "../login-area/login-area-dialog"
 
 export const Header = () => {
+
     return (
         <header className="flex justify-between items-center px-4">
                 <Link href={"/"}>
@@ -17,11 +20,8 @@ export const Header = () => {
 
             <div className="flex gap-4">
                 <Cart/>
-
-
-                <Button className="cursor-pointer">
-                    Login / Cadastro
-                </Button>
+                <LoginAreaDialog/>
+                <LoginAreaButton/>
             </div>
         </header>
     )
