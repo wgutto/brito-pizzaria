@@ -1,7 +1,7 @@
 "use client"
 
 import { useAuth } from "@/stores/auth"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog"
 import { useState } from "react"
 import { Button } from "../ui/button"
 import { ArrowLeft } from "lucide-react"
@@ -31,7 +31,7 @@ export const LoginAreaDialog = () => {
         >
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle className="flex items-center gap-2">
+                    <DialogTitle className="text-xl flex gap-2 font-bold">
                         {step !== "EMAIL" &&
                             <Button
                                 variant="ghost"
@@ -42,10 +42,16 @@ export const LoginAreaDialog = () => {
                                 <ArrowLeft className="size-4"/>
                             </Button>
                         }
-                        {step === "EMAIL" && "Login / Cadastro"}
+                        
+                        {step === "EMAIL" && "Continuar"}
                         {step === "REGISTER" && "Cadastro"}
                         {step === "LOGIN" && "Login"}
                     </DialogTitle>
+                    <DialogDescription>
+                        {step === "EMAIL" && "Informe seu email para continuar."}
+                        {step === "REGISTER" && "Faça o cadastro para concluir seu pedido."}
+                        {step === "LOGIN" && "Faça o login para concluir seu pedido."}
+                    </DialogDescription>
                 </DialogHeader>
 
                 <div>
