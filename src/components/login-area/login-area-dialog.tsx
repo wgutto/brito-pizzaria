@@ -6,6 +6,8 @@ import { useState } from "react"
 import { Button } from "../ui/button"
 import { ArrowLeft } from "lucide-react"
 import { LoginAreaStepEmail } from "./login-area-step-email"
+import { LoginAreaStepRegister } from "./login-area-step-register"
+import { LoginAreaStepLogin } from "./login-area-step-login"
 
 type STEPS = "EMAIL" | "LOGIN" | "REGISTER"
 
@@ -14,6 +16,8 @@ export const LoginAreaDialog = () => {
 
     const [step, setStep] = useState<STEPS>("EMAIL")
     const [emailField, setEmailField] = useState("")
+
+    
 
     const handleStepEmail = (hasEmail: boolean, email: string) => {
         setEmailField(email)
@@ -31,12 +35,12 @@ export const LoginAreaDialog = () => {
         >
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle className="text-xl flex gap-2 font-bold">
+                    <DialogTitle className="flex text-xl items-center gap-2 font-bold">
                         {step !== "EMAIL" &&
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="cursor-pointer"
+                                className="flex cursor-pointer"
                                 onClick={() => setStep("EMAIL")}
                             >
                                 <ArrowLeft className="size-4"/>
@@ -60,11 +64,11 @@ export const LoginAreaDialog = () => {
                     }
 
                     {step === "REGISTER" &&
-                        <div>Cadastro</div>
+                        <LoginAreaStepRegister  email={emailField}/>
                     }
 
                     {step === "LOGIN" &&
-                        <div>Login</div>
+                        <LoginAreaStepLogin email={emailField}/>
                     }
                 </div>
             </DialogContent>
