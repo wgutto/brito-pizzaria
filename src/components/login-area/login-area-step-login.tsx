@@ -52,7 +52,7 @@ export const LoginAreaStepLogin = ({ email }: Props) => {
             }
 
         } catch (error: any) {
-            setErro(error.response.data.error)
+            toast.error(error.response?.data?.error)
         } finally {
             setLoading(false)
         }

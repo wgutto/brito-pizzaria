@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/Header";
 import { ToggleModeButton } from "@/components/layout/ToggleThemeMode";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
           <div className="fixed bottom-5 right-5"><ToggleModeButton /></div>
           <Header />
           {children}
+          <Toaster/>
         </ThemeProvider>
       </body>
     </html>
