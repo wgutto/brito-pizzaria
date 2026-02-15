@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/Header";
 import { ToggleModeButton } from "@/components/layout/ToggleThemeMode";
 import { Toaster } from "sonner";
+import { ReactNode } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +21,7 @@ export const metadata: Metadata = {
   title: "Brito Pizzaria"
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-
-  
-
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body
