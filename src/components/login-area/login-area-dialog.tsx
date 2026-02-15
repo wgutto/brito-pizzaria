@@ -68,7 +68,7 @@ export const LoginAreaDialog = () => {
                     }
 
                     {step === "LOGIN" &&
-                        <LoginAreaStepLogin email={emailField}/>
+                        <LoginAreaStepLogin email={emailField} setStep={() => setStep("EMAIL")}/>
                     }
                 </div>
             </DialogContent>

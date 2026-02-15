@@ -6,27 +6,27 @@ type Store = {
     user: User | null
     authenticated: boolean
     open: boolean
-    setToken: (token: string | null) => void
-    setUser: (user: User | null) => void
+
+    login: (user: User, token: string) => void
     setOpen: (newOpen: boolean) => void
     logout: () => void
 }
 
-export const useAuth = create<Store>()(set => ({
+export const useAuth = create<Store>((set) => ({
     token: null,
     user: null,
     authenticated: false,
     open: false,
 
-    setToken: (token: string | null) => set({ token: token, authenticated: !!token }),
+    login: (user, token) => {
+        localStorage.setItem("token", token)
+        set({ user, token, authenticated: true })
+    },
 
-    setUser: (user: User | null) => set({user: user, authenticated: !!user}),
+    setOpen: (newOpen: boolean) => set({ open: newOpen }),
 
-    setOpen: (newOpen: boolean) => set({open: newOpen}),
-
-    logout: () => set({
-        token: null,
-        user: null,
-        authenticated: false
-    })
+    logout: () => {
+        localStorage.removeItem("token")
+        set({ token: null, user: null, authenticated: false })
+    }
 }))

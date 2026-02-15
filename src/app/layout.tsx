@@ -20,11 +20,10 @@ export const metadata: Metadata = {
   title: "Brito Pizzaria"
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+
+  
+
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body
@@ -39,7 +38,7 @@ export default function RootLayout({
           <div className="fixed bottom-5 right-5"><ToggleModeButton /></div>
           <Header />
           {children}
-          <Toaster/>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

@@ -7,10 +7,9 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { useState } from "react"
-import { api } from "@/lib/axios"
 import { useAuth } from "@/stores/auth"
-import { authResponse } from "@/types/authResponse"
 import { toast } from "sonner"
+import { loginAuth } from "@/services/loginAuth"
 
 const formSchema = z.object({
     email: z.string().email("E-mail inválido").max(254),
@@ -19,11 +18,11 @@ const formSchema = z.object({
 
 type Props = {
     email: string
+    setStep: () => void
 }
 
-export const LoginAreaStepLogin = ({ email }: Props) => {
+export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
     const [loading, setLoading] = useState(false)
-    const [erro, setErro] = useState("")
     const auth = useAuth()
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -38,17 +37,12 @@ export const LoginAreaStepLogin = ({ email }: Props) => {
         try {
             setLoading(true)
 
-            const response = await api.post("/login", {
-                email: data.email,
-                password: data.password
-            })
+            const dataResponse = await loginAuth(data.email, data.password)
 
-            const res: authResponse = response.data
-
-            if (res.user && res.auth?.token) {
-                auth.setUser(res.user)
-                auth.setToken(res.auth.token)
+            if (dataResponse.user && dataResponse.auth?.token) {
+                auth.login(dataResponse.user, dataResponse.auth.token)
                 auth.setOpen(false)
+                setStep()
             }
 
         } catch (error: any) {
