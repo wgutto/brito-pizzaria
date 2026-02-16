@@ -10,7 +10,7 @@ import { useState } from "react"
 import { validateEmailService } from "@/services/validateEmailService"
 
 const formSchema = z.object({
-    email: z.string().email("E-mail inválido").max(254)
+    email: z.string().email("Digite um email válido").max(254)
 })
 
 type Props = {
@@ -67,7 +67,7 @@ export const LoginAreaStepEmail = ({ onValidade }: Props) => {
                 />
             </FieldGroup>
             <div className="w-full flex justify-end">
-                <Button disabled={loading} className="cursor-pointer bg-green-700 hover:bg-green-800">Continuar</Button>
+                <Button disabled={loading} className="cursor-pointer bg-blue-700 hover:bg-blue-800">Continuar</Button>
             </div>
         </form>
     )

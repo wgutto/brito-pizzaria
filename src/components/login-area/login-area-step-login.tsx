@@ -12,8 +12,8 @@ import { toast } from "sonner"
 import { loginService } from "@/services/loginService"
 
 const formSchema = z.object({
-    email: z.string().email("E-mail inválido").max(254),
-    password: z.string().min(6, "Senha com no mínimo 6 caracteres").max(60)
+    email: z.email({ error: "Digite um email válido"}).max(254, {error: "Email muito longo"}),
+    password: z.string().min(6, {error: "Mínimo de 6 caracteres"}).max(60, {error: "Senha muito longa"})
 })
 
 type Props = {
@@ -23,6 +23,7 @@ type Props = {
 
 export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
     const [loading, setLoading] = useState(false)
+    const [errorPassword, setErrorPassword] = useState("")
     const auth = useAuth()
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -48,14 +49,14 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
             }
 
         } catch (error: any) {
-            toast.error(error.response?.data?.error)
+            setErrorPassword(error.response?.data?.error)
         } finally {
             setLoading(false)
         }
     }
 
     return (
-        <form className="flex flex-col items-center gap-5 mt-2" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="flex flex-col gap-5 mt-2" onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup>
                 <Controller
                     name="email"
@@ -88,20 +89,30 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
                                 Senha
                             </FieldLabel>
                             <Input
-                                {...field}
                                 type="password"
+                                {...field}
+                                onChange={(e) => {
+                                    field.onChange(e)
+
+                                    if(errorPassword) {
+                                        setErrorPassword("")
+                                    }
+                                }}
                                 placeholder="Digite sua senha"
                                 disabled={loading}
                             />
                             {fieldState.invalid && (
                                 <FieldError errors={[fieldState.error]} />
                             )}
+                            {errorPassword && !fieldState.invalid &&
+                                <FieldError errors={[{message: errorPassword}]} />
+                            }
                         </Field>
                     )}
                 />
             </FieldGroup>
             <div className="w-full flex justify-end">
-                <Button disabled={loading} className="cursor-pointer font-bold bg-green-700 hover:bg-green-800">Login</Button>
+                <Button disabled={loading} className="cursor-pointer font-bold bg-blue-700 hover:bg-blue-800">Login</Button>
             </div>
         </form>
     )
