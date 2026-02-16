@@ -9,7 +9,7 @@ import { Button } from "../ui/button"
 import { useState } from "react"
 import { useAuth } from "@/stores/auth"
 import { toast } from "sonner"
-import { loginAuth } from "@/services/loginAuth"
+import { loginService } from "@/services/loginService"
 
 const formSchema = z.object({
     email: z.string().email("E-mail inválido").max(254),
@@ -35,12 +35,14 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         try {
+            const parsed = formSchema.parse(data)
+
             setLoading(true)
 
-            const dataResponse = await loginAuth(data.email, data.password)
+            const response = await loginService(parsed.email, parsed.password)
 
-            if (dataResponse.user && dataResponse.auth?.token) {
-                auth.login(dataResponse.user, dataResponse.auth.token)
+            if (response.user && response.auth?.token) {
+                auth.login(response.user, response.auth.token)
                 auth.setOpen(false)
                 setStep()
             }

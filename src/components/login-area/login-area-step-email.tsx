@@ -7,7 +7,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { useState } from "react"
-import { api } from "@/lib/axios"
+import { validateEmailService } from "@/services/validateEmailService"
 
 const formSchema = z.object({
     email: z.string().email("E-mail inválido").max(254)
@@ -32,15 +32,13 @@ export const LoginAreaStepEmail = ({ onValidade }: Props) => {
         try {
             setLoading(true)
             
-            const response = await api.post("/validate_email", {
-                email: data.email
-            })
+            const response = await validateEmailService(data.email)
 
-            setLoading(false)
-
-            onValidade(response.data.exists ? true : false, data.email)
+            onValidade(response.exists ? true : false, data.email)
             
         } catch (error) {
+            setLoading(false)
+        } finally {
             setLoading(false)
         }
     }
