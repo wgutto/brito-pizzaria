@@ -3,6 +3,7 @@
 import { useAuth } from "@/stores/auth"
 import Link from "next/link"
 import { Button } from "../ui/button"
+import { LogOut } from "lucide-react"
 
 export const LoginAreaButton = () => {
     const auth = useAuth()
@@ -15,16 +16,21 @@ export const LoginAreaButton = () => {
         return (
             <>
                 <Link href={"/pedidos"}>
-                    <Button>Meus pedidos</Button>
+                    <Button className="cursor-pointer">Meus pedidos</Button>
                 </Link>
 
-                <Button onClick={handleLogout}>Sair</Button>
+                <Button 
+                    onClick={handleLogout}
+                    className="cursor-pointer"
+                >
+                    <LogOut className="size-5"/>
+                </Button>
             </>
         )
     } else {
         return (
             <>
-                <Button onClick={() => auth.setOpen(true)} className="cursor-pointer">Login / Cadastro</Button>
+                <Button onClick={() => auth.setOpen(true)} className="cursor-pointer">Entrar</Button>
             </>
         )
     }

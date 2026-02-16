@@ -67,7 +67,7 @@ export const LoginAreaStepEmail = ({ onValidade }: Props) => {
                 />
             </FieldGroup>
             <div className="w-full flex justify-end">
-                <Button disabled={loading} className="bg-green-600 cursor-pointer hover:bg-green-700">Continuar</Button>
+                <Button disabled={loading} className="cursor-pointer bg-green-700 hover:bg-green-800">Continuar</Button>
             </div>
         </form>
     )

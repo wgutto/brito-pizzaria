@@ -35,23 +35,25 @@ export const LoginAreaDialog = () => {
         >
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle className="flex text-xl items-center gap-2 font-bold">
+                    <DialogTitle className="flex gap-2">
                         {step !== "EMAIL" &&
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="flex cursor-pointer"
+                                className="cursor-pointer"
                                 onClick={() => setStep("EMAIL")}
                             >
-                                <ArrowLeft className="size-4"/>
+                                <ArrowLeft className="size-5"/>
                             </Button>
                         }
                         
-                        {step === "EMAIL" && "Continuar"}
-                        {step === "REGISTER" && "Cadastro"}
-                        {step === "LOGIN" && "Login"}
+                        <div className="text-2xl">
+                            {step === "EMAIL" && "Continuar"}
+                            {step === "REGISTER" && "Cadastro"}
+                            {step === "LOGIN" && "Login"}
+                        </div>
                     </DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="text-left">
                         {step === "EMAIL" && "Informe seu email para continuar."}
                         {step === "REGISTER" && "Faça o cadastro para concluir seu pedido."}
                         {step === "LOGIN" && "Faça o login para concluir seu pedido."}

@@ -101,7 +101,7 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
                 />
             </FieldGroup>
             <div className="w-full flex justify-end">
-                <Button disabled={loading} className="bg-green-700 cursor-pointer hover:bg-green-800 font-bold">Login</Button>
+                <Button disabled={loading} className="cursor-pointer font-bold bg-green-700 hover:bg-green-800">Login</Button>
             </div>
         </form>
     )
