@@ -17,8 +17,6 @@ export const LoginAreaDialog = () => {
     const [step, setStep] = useState<STEPS>("EMAIL")
     const [emailField, setEmailField] = useState("")
 
-    
-
     const handleStepEmail = (hasEmail: boolean, email: string) => {
         setEmailField(email)
 
@@ -28,6 +26,15 @@ export const LoginAreaDialog = () => {
             setStep("REGISTER")
         }
     }
+
+    const handleStepRegister = (email: string) => {
+
+        if(email) {
+            setEmailField(email)
+        }
+
+    }
+
     return (
         <Dialog
             open={auth.open}
@@ -66,7 +73,7 @@ export const LoginAreaDialog = () => {
                     }
 
                     {step === "REGISTER" &&
-                        <LoginAreaStepRegister  email={emailField}/>
+                        <LoginAreaStepRegister  email={emailField} setStep={() => setStep("LOGIN")} onRegister={handleStepRegister}/>
                     }
 
                     {step === "LOGIN" &&

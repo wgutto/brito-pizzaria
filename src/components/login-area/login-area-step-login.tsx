@@ -8,12 +8,11 @@ import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { useState } from "react"
 import { useAuth } from "@/stores/auth"
-import { toast } from "sonner"
 import { loginService } from "@/services/loginService"
 
-const formSchema = z.object({
-    email: z.email({ error: "Digite um email válido"}).max(254, {error: "Email muito longo"}),
-    password: z.string().min(6, {error: "Mínimo de 6 caracteres"}).max(60, {error: "Senha muito longa"})
+const loginSchema = z.object({
+    email: z.email({ error: "Digite um email válido" }).max(254, { error: "Email muito longo" }),
+    password: z.string().min(6, { error: "Mínimo de 6 caracteres" }).max(60, { error: "Senha muito longa" })
 })
 
 type Props = {
@@ -26,21 +25,22 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
     const [errorPassword, setErrorPassword] = useState("")
     const auth = useAuth()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: email,
             password: ""
         },
     })
 
-    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+        const parsed = loginSchema.safeParse(data)
+
+        if (!parsed.success) return
+
         try {
-            const parsed = formSchema.parse(data)
-
             setLoading(true)
-
-            const response = await loginService(parsed.email, parsed.password)
+            const response = await loginService(parsed.data.email, parsed.data.password)
 
             if (response.user && response.auth?.token) {
                 auth.login(response.user, response.auth.token)
@@ -49,7 +49,7 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
             }
 
         } catch (error: any) {
-            setErrorPassword(error.response?.data?.error)
+            setErrorPassword(error.response?.data?.error || "Email ou senha inválidos")
         } finally {
             setLoading(false)
         }
@@ -94,7 +94,7 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
                                 onChange={(e) => {
                                     field.onChange(e)
 
-                                    if(errorPassword) {
+                                    if (errorPassword) {
                                         setErrorPassword("")
                                     }
                                 }}
@@ -105,14 +105,14 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
                                 <FieldError errors={[fieldState.error]} />
                             )}
                             {errorPassword && !fieldState.invalid &&
-                                <FieldError errors={[{message: errorPassword}]} />
+                                <FieldError errors={[{ message: errorPassword }]} />
                             }
                         </Field>
                     )}
                 />
             </FieldGroup>
             <div className="w-full flex justify-end">
-                <Button disabled={loading} className="cursor-pointer font-bold bg-blue-700 hover:bg-blue-800">Login</Button>
+                <Button disabled={loading} className="cursor-pointer font-bold bg-blue-700 hover:bg-blue-800">Entrar</Button>
             </div>
         </form>
     )
