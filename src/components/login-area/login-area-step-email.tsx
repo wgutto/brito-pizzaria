@@ -9,8 +9,8 @@ import { Button } from "../ui/button"
 import { useState } from "react"
 import { validateEmailService } from "@/services/validateEmailService"
 
-const formSchema = z.object({
-    email: z.string().email("Digite um email válido").max(254)
+const validateSchema = z.object({
+    email: z.email({error: "Digite um email válido"}).max(254, { error: "Email muito longo" })
 })
 
 type Props = {
@@ -20,14 +20,18 @@ type Props = {
 export const LoginAreaStepEmail = ({ onValidade }: Props) => {
     const [loading, setLoading] = useState(false)
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof validateSchema>>({
+        resolver: zodResolver(validateSchema),
         defaultValues: {
             email: ""
         },
     })
 
-    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const onSubmit = async (data: z.infer<typeof validateSchema>) => {
+
+        const parsed = validateSchema.safeParse(data)
+
+        if(!parsed.success) return
 
         try {
             setLoading(true)
@@ -37,7 +41,8 @@ export const LoginAreaStepEmail = ({ onValidade }: Props) => {
             onValidade(response.exists ? true : false, data.email)
             
         } catch (error) {
-            setLoading(false)
+            console.error(error)
+            // Adicionar um erro para o user
         } finally {
             setLoading(false)
         }

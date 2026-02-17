@@ -34,13 +34,10 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
     })
 
     const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-        const parsed = loginSchema.safeParse(data)
-
-        if (!parsed.success) return
 
         try {
             setLoading(true)
-            const response = await loginService(parsed.data.email, parsed.data.password)
+            const response = await loginService(data.email, data.password)
 
             if (response.user && response.auth?.token) {
                 auth.login(response.user, response.auth.token)

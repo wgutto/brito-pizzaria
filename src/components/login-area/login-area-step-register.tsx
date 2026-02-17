@@ -40,18 +40,14 @@ export const LoginAreaStepRegister = ({ email, setStep, onRegister }: Props) => 
 
     const onSubmit = async (data: z.infer<typeof registerSchema>) => {
 
-        const parsed = registerSchema.safeParse(data)
-
-        if(!parsed.success) return
-
         try {
             setLoading(true)
 
             const response = await registerService(
-                parsed.data.name,
-                parsed.data.email,
-                parsed.data.password,
-                parsed.data.confirmPassword
+                data.name,
+                data.email,
+                data.password,
+                data.confirmPassword
             )
 
             if(response) {
@@ -60,7 +56,8 @@ export const LoginAreaStepRegister = ({ email, setStep, onRegister }: Props) => 
             }
 
         } catch (error) {
-
+            console.error(error)
+            // Adicionar um erro para o user
         } finally {
             setLoading(false)
         }
