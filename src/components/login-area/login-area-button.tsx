@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import { LogOut } from "lucide-react"
 import { useEffect, useState } from "react"
-import { api } from "@/lib/axios"
+import { logoutService } from "@/services/logoutService"
 
 type Props = {
     initialState: boolean
@@ -20,9 +20,7 @@ export const LoginAreaButton = ({ initialState }: Props) => {
 
     const handleLogout = async () => {
 
-        await api.post("/logout", {}, {
-            withCredentials: true
-        })
+        const logoutReq = await logoutService()
 
         auth.logout()
     }
