@@ -3,8 +3,13 @@ import Link from "next/link"
 import { Cart } from "./cart/Cart"
 import { LoginAreaButton } from "../login-area/login-area-button"
 import { LoginAreaDialog } from "../login-area/login-area-dialog"
+import { cookies } from "next/headers"
 
-export const Header = () => {
+export const Header = async () => {
+
+    const cookieStore = await cookies()
+
+    const token = cookieStore.get("token")
 
     return (
         <header className="flex justify-between items-center px-4">
@@ -20,7 +25,7 @@ export const Header = () => {
             <div className="flex gap-4">
                 <Cart/>
                 <LoginAreaDialog/>
-                <LoginAreaButton/>
+                <LoginAreaButton initialState={token ? true : false}/>
             </div>
         </header>
     )

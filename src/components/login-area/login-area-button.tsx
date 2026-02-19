@@ -4,15 +4,30 @@ import { useAuth } from "@/stores/auth"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { LogOut } from "lucide-react"
+import { useEffect, useState } from "react"
+import { api } from "@/lib/axios"
 
-export const LoginAreaButton = () => {
+type Props = {
+    initialState: boolean
+}
+export const LoginAreaButton = ({ initialState }: Props) => {
+    const [authState, setAuthState] = useState(initialState)
     const auth = useAuth()
 
-    const handleLogout = () => {
+    useEffect(() => {
+        setAuthState(auth.authenticated)
+    }, [auth.authenticated])
+
+    const handleLogout = async () => {
+
+        await api.post("/logout", {}, {
+            withCredentials: true
+        })
+
         auth.logout()
     }
 
-    if (auth.authenticated) {
+    if (authState) {
         return (
             <>
                 <Link href={"/pedidos"}>

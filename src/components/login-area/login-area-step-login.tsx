@@ -39,8 +39,8 @@ export const LoginAreaStepLogin = ({ email, setStep }: Props) => {
             setLoading(true)
             const response = await loginService(data.email, data.password)
 
-            if (response.user && response.auth?.token) {
-                auth.login(response.user, response.auth.token)
+            if (response.user) {
+                auth.login(response.user)
                 auth.setOpen(false)
                 setStep()
             }

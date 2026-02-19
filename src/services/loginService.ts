@@ -1,13 +1,20 @@
 import { api } from "@/lib/axios"
-import { authResponse } from "@/types/authResponse"
+import { User } from "@/types/user"
+
+type loginResponse = {
+    user: User
+    message: string
+}
 
 export const loginService = async (email: string, password: string) => {
     const response = await api.post("/login", {
         email: email,
         password: password
+    }, {
+        withCredentials: true
     })
 
-    const data: authResponse = response.data
+    const data: loginResponse = response.data
 
     return data
 }

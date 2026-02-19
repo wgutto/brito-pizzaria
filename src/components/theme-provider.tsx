@@ -10,19 +10,14 @@ export function ThemeProvider({ children, ...props }: ComponentProps<typeof Next
 
     useEffect(() => {
         const load = async () => {
-            const token = localStorage.getItem("token")
-            if (!token) return
-
             try {
                 const response = await api.get("/me", {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                    withCredentials: true
                 })
 
-                const user = response.data
+                const user = response.data.user
 
-                auth.login(user, token)
+                auth.login(user)
             } catch (error) {
                 auth.logout()
             }
