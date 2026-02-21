@@ -11,7 +11,6 @@ const Page = async () => {
         <>
             <main className="container mx-auto mb-10 px-4">
                 <PizzasTabs active="/pizzas/doces"/>
-                <h1 className="text-center text-4xl font-bold my-10">Pizzas Doces</h1>
                 <PizzaList pizzas={pizzas} />
             </main>
         </>

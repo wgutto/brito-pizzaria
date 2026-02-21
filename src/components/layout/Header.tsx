@@ -12,7 +12,7 @@ export const Header = async () => {
     const token = cookieStore.get("token")
 
     return (
-        <header className="flex justify-between items-center px-4">
+        <header className="w-full flex justify-between items-center px-4 lg:px-24">
                 <Link href={"/"}>
                     <Image
                         src="/logo/logo-brito-pizzaria.png"

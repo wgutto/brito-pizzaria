@@ -9,9 +9,8 @@ const Page = async () => {
 
   return (
     <>
-      <main className="container mx-auto mb-10 px-4">
+      <main className="container mx-auto px-4">
         <PizzasTabs active="/"/>
-        <h1 className="text-center text-4xl font-bold my-10">Nossas Pizzas</h1>
         <PizzaList pizzas={pizzas} />
       </main>
     </>

@@ -1,4 +1,4 @@
-import { Product } from "@/lib/generated/prisma/client"
+import { Product } from "@/types/product"
 import { create } from "zustand"
 
 type Store = {

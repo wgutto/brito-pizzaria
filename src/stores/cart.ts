@@ -1,43 +1,58 @@
 import { CartItem } from "@/types/cart-item"
 import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
 type Store = {
     open: boolean
-    setOpen: (open: boolean) => void
-
     items: CartItem[]
+
+    setOpen: (open: boolean) => void
     addItem: (item: CartItem) => void
     updateQuantity: (productId: number, delta: number, size: string, edge: string) => void
 }
 
-export const useCart = create<Store>()((set) => ({
-    open: false,
-    setOpen: (open => set(state => ({ ...state, open }))),
-    items: [],
-    addItem: (item) => set(state => {
-        let clonedItems = [...state.items]
-        const existingItem = state.items.find(i => i.productId === item.productId && i.size === item.size && i.edge === item.edge)
+export const useCart = create<Store>()(
+    persist(
+        (set) => ({
+            open: false,
+            items: [],
 
-        if(existingItem) {
-            clonedItems = clonedItems.map(i => 
-                i.productId === item.productId && i.size === item.size && i.edge === item.edge ? {...i, quantity: i.quantity + item.quantity} : i
-            )
-        } else {
-            clonedItems.push(item)
-        }
+            setOpen: (open => set(state => ({ ...state, open }))),
 
-        return {...state, items: clonedItems}
-    }),
-    updateQuantity: (productId, delta, size, edge) => set(state => {
-        const clonedItems = state.items.map(i => {
-            if(i.productId !== productId || i.size !== size || i.edge !== edge) return i
-            const newQuantity = i.quantity + delta
+            addItem: (item) => set(state => {
+                const existingItem = state.items.find(i => i.productId === item.productId && i.size === item.size && i.edge === item.edge)
 
-            if(newQuantity <= 0) return null
+                let uptadeItems = []
 
-            return {...i, quantity: newQuantity}
-        }).filter((i): i is CartItem => i !== null)
+                if (existingItem) {
+                    uptadeItems = state.items.map(i =>
+                        i.productId === item.productId && i.size === item.size && i.edge === item.edge ? { ...i, quantity: i.quantity + item.quantity } : i
+                    )
+                } else {
+                    uptadeItems = [...state.items, item]
+                }
 
-    return {...state, items: clonedItems}
-    })
-}))
+                return { items: uptadeItems }
+            }),
+
+            updateQuantity: (productId, delta, size, edge) => set(state => {
+
+                const uptadeitems = state.items.map(i => {
+                    if (i.productId !== productId || i.size !== size || i.edge !== edge) return i
+
+                    const newQuantity = i.quantity + delta
+                    if (newQuantity <= 0) return null
+
+                    return { ...i, quantity: newQuantity }
+                }).filter((i): i is CartItem => i !== null)
+
+                return { items: uptadeitems }
+            })
+        }), {
+        name: "cart-storage",
+        partialize: (state) => ({
+            items: state.items
+        }),
+    }
+    )
+)
