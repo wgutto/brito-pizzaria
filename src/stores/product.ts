@@ -1,9 +1,9 @@
-import { Product } from "@/types/product"
+import { ProductType } from "@/types/product"
 import { create } from "zustand"
 
 type Store = {
-    products: Product[]
-    setProducts: (products: Product[]) => void
+    products: ProductType[]
+    setProducts: (products: ProductType[]) => void
 }
 
 export const useProducts = create<Store>((set) => ({
