@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Header } from "@/components/layout/Header";
-import { ToggleModeButton } from "@/components/layout/ToggleThemeMode";
+import { ToggleModeButton } from "@/components/layout/toggle-theme-mode";
 import { Toaster } from "sonner";
 import { ReactNode } from "react";
+import { Header } from "@/components/layout/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           disableTransitionOnChange
         >
           <div className="fixed bottom-5 right-5"><ToggleModeButton /></div>
-          <Header />
+          <Header/>
           {children}
           <Toaster />
         </ThemeProvider>

@@ -5,12 +5,12 @@ import { Button } from "../ui/button"
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
 import { decimalToMoney } from "@/lib/utils"
 import { useState } from "react"
-import { DetailsModal } from "./DetailsModal"
+import { DetailsModal } from "./details-modal"
 import Image from "next/image"
-import { Product } from "@/types/product"
+import { ProductType } from "@/types/product"
 
 type Props = {
-    pizza: Product
+    pizza: ProductType
 }
 export const PizzaItem = ({ pizza }: Props) => {
     const [openModal, setOpenModal] = useState(false)
@@ -35,7 +35,7 @@ export const PizzaItem = ({ pizza }: Props) => {
                         </div>
                     </CardHeader>
 
-                    <CardFooter className="flex flex-col gap-3 items-start lg:items-center lg:flex-row lg:justify-between lg:gap-0 px-0">
+                    <CardFooter className="flex flex-col gap-4 items-start lg:items-center lg:flex-row lg:justify-between lg:gap-0 px-0">
                         <CardTitle className="text-left">
                             <span className="block text-xs text-muted-foreground">a partir de</span>
                             <span className="text-xl font-bold">{decimalToMoney(pizza.price)}</span>

@@ -1,9 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Cart } from "./cart/Cart"
 import { LoginAreaButton } from "../login-area/login-area-button"
 import { LoginAreaDialog } from "../login-area/login-area-dialog"
 import { cookies } from "next/headers"
+import { Cart } from "./cart/cart"
 
 export const Header = async () => {
 
@@ -12,7 +12,7 @@ export const Header = async () => {
     const token = cookieStore.get("token")
 
     return (
-        <header className="w-full flex justify-between items-center px-4 lg:px-24">
+        <header className="w-full flex flex-col mb-5 min-[400]:flex-row min-[400]:mb-0 justify-between items-center px-4 lg:px-24">
                 <Link href={"/"}>
                     <Image
                         src="/logo/logo-brito-pizzaria.png"

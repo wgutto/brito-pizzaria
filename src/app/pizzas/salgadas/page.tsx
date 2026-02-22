@@ -1,5 +1,5 @@
 import { PizzaList } from "@/components/home/pizza-list"
-import { PizzasTabs } from "@/components/layout/PizzasTabs/PizzaTabs"
+import { PizzasTabs } from "@/components/layout/PizzasTabs/pizza-tabs"
 import { api } from "@/lib/axios"
 
 const Page = async () => {
@@ -8,12 +8,10 @@ const Page = async () => {
     const pizzas = pizzaReq.data.pizzas ?? []
 
     return (
-        <>
-            <main className="container mx-auto px-4">
-                <PizzasTabs active="/pizzas/salgadas"/>
-                <PizzaList pizzas={pizzas} />
-            </main>
-        </>
+        <main className="container mx-auto px-4">
+            <PizzasTabs active="/pizzas/salgadas" />
+            <PizzaList pizzas={pizzas} />
+        </main>
     )
 }
 

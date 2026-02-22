@@ -1,4 +1,3 @@
-import { Product } from "@/lib/generated/prisma/client"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog"
 import { Button } from "../ui/button"
 import { useState } from "react"
@@ -6,9 +5,10 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { calculatePizzaFinalPrice, decimalToMoney } from "@/lib/utils"
 import { useCart } from "@/stores/cart"
 import Image from "next/image"
+import { ProductType } from "@/types/product"
 
 type Props = {
-    pizza: Product
+    pizza: ProductType
     openModal: boolean
     closeModal: () => void
 }
