@@ -14,7 +14,7 @@ export const CartProduct = ({ data }: Props) => {
     const cart = useCart()
     const products = useProducts()
 
-    let product = products.products.find(i => i.id === data.productId)
+    let product = products.products.find(item => item.id === data.productId)
     if(!product) return null
 
     return (

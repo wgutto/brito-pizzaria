@@ -20,19 +20,20 @@ export const useCart = create<Store>()(
             setOpen: (open => set(state => ({ ...state, open }))),
 
             addItem: (item) => set(state => {
+                let itemsCloned = [...state.items]
                 const existingItem = state.items.find(i => i.productId === item.productId && i.size === item.size && i.edge === item.edge)
 
                 let uptadeItems = []
 
                 if (existingItem) {
-                    uptadeItems = state.items.map(i =>
+                    itemsCloned = itemsCloned.map(i =>
                         i.productId === item.productId && i.size === item.size && i.edge === item.edge ? { ...i, quantity: i.quantity + item.quantity } : i
                     )
                 } else {
-                    uptadeItems = [...state.items, item]
+                    itemsCloned.push(item)
                 }
 
-                return { items: uptadeItems }
+                return {...state, items: itemsCloned }
             }),
 
             updateQuantity: (productId, delta, size, edge) => set(state => {

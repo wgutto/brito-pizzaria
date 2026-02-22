@@ -3,25 +3,25 @@ import { Frown } from "lucide-react"
 import { CartProduct } from "./cart-item"
 
 export const CartList = () => {
-    const cart = useCart()
+    const items = useCart(state => state.items)
+
+    if (items.length === 0) {
+        return (
+            <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground gap-2">
+                <Frown className="size-20" />
+                <p className="text-md">Nenhum item no carrinho.</p>
+            </div>
+        )
+    }
 
     return (
         <div className="w-full flex flex-col gap-4 min-[500]:overflow-y-auto">
-            {cart.items.length > 0 &&
-                <>
-                    {cart.items.map((item) =>
-                        <CartProduct key={`${item.productId}-${item.size}-${item.edge}`} data={item}/>
-                    )}
-                </>
-            }
-
-            {cart.items.length === 0 &&
-                <div className="w-full h-full flex flex-col items-center justify-center gap-8">
-                    <p>Nenhum item no carrinho.</p>
-
-                    <Frown className="size-30" />
-                </div>
-            }
+            {items.map((item) => (
+                <CartProduct
+                    key={`${item.productId}-${item.size}-${item.edge}`}
+                    data={item}
+                />
+            ))}
         </div>
     )
 }

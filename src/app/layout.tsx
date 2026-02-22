@@ -6,6 +6,8 @@ import { ToggleModeButton } from "@/components/layout/toggle-theme-mode";
 import { Toaster } from "sonner";
 import { ReactNode } from "react";
 import { Header } from "@/components/layout/header";
+import { PizzaInitializer } from "@/components/pizza-initializer";
+import { getAllPizzasService } from "@/services/getAllPizzasService";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,10 +20,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Brito Pizzaria"
+  title: "Brito Pizzaria",
+  description: "As melhores pizzas salgadas e doces da região 🍕"
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
+
+  const pizzas = await getAllPizzasService()
+
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body
@@ -33,12 +39,21 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           enableSystem
           disableTransitionOnChange
         >
-          <div className="fixed bottom-5 right-5"><ToggleModeButton /></div>
-          <Header/>
+
+          <PizzaInitializer pizzas={pizzas} />
+
+          <Header />
+
           {children}
+
           <Toaster />
+
+          <div className="fixed bottom-5 right-5"><ToggleModeButton /></div>
+
         </ThemeProvider>
       </body>
     </html>
   );
 }
+
+export default RootLayout
