@@ -8,6 +8,7 @@ import { ReactNode } from "react";
 import { Header } from "@/components/layout/header";
 import { PizzaInitializer } from "@/components/pizza-initializer";
 import { getAllPizzasService } from "@/services/getAllPizzasService";
+import { Footer } from "@/components/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,6 +46,8 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
           <Header />
 
           {children}
+
+          <Footer/>
 
           <Toaster />
 
