@@ -1,5 +1,4 @@
 import { PizzaList } from "@/components/home/pizza-list"
-import { PizzasTabs } from "@/components/layout/PizzasTabs/pizza-tabs"
 import { getSavoryPizzasService } from "@/services/getSavoryPizzasService"
 
 const Page = async () => {
@@ -7,8 +6,7 @@ const Page = async () => {
     const pizzas = await getSavoryPizzasService()
 
     return (
-        <main className="container mx-auto px-4">
-            <PizzasTabs active="/pizzas/salgadas" />
+        <main className="container mx-auto px-4 max-w-7xl">
             <PizzaList pizzas={pizzas} />
         </main>
     )
